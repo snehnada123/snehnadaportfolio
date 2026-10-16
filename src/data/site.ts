@@ -10,6 +10,7 @@ export const site = {
     github: 'https://github.com/snehnada123',
     linkedin: 'https://www.linkedin.com/in/snehnada/',
     x: 'https://x.com/SnehNada',
+    substack: 'https://snehnada.substack.com',
   },
   availability: {
     open: true,

@@ -2,45 +2,31 @@ import { experience } from '../data/resume'
 
 export function Experience() {
   return (
-    <section
-      id="experience"
-      aria-label="Experience"
-      className="page-section border-t border-border"
-    >
-      <div className="mx-auto max-w-6xl page-inner flex flex-col gap-6 sm:gap-10">
-        <div className="flex max-w-2xl flex-col gap-3">
-          <h2 className="text-title">Experience</h2>
-          <p className="text-body text-muted">
-            The experience that got my hands dirty.
-          </p>
-        </div>
+    <section id="experience" aria-label="About and experience" className="page-section page-wrap section-divider">
+      <div className="section-heading">
+        <p className="eyebrow">01 / About</p>
+        <h2>Curiosity is how I work.</h2>
+        <p className="section-intro">
+          I like getting close to a problem, understanding its moving parts, and making the solution feel simple. I’m especially interested in useful AI, dependable backends, and the details that make software a pleasure to use.
+        </p>
+      </div>
 
-        <div className="flex flex-col gap-6">
-          {experience.map((entry) => (
-            <article
-              key={entry.id}
-              className="flex flex-col gap-4 border border-border p-4 sm:p-6"
-            >
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                <div className="flex flex-col gap-1">
-                  <h3 className="text-headline">{entry.company}</h3>
-                  <p className="text-mono text-caption text-muted">{entry.role}</p>
-                </div>
-                <span className="text-mono text-caption text-terminal">{entry.type}</span>
-              </div>
-
-              <p className="text-body text-muted max-w-3xl">{entry.description}</p>
-
-              <ul className="flex flex-wrap gap-1.5 sm:gap-2" aria-label="Technologies">
-                {entry.tags.map((tag) => (
-                  <li key={tag} className="tag-pill max-sm:text-[0.625rem] max-sm:px-2 max-sm:py-0.5">
-                    {tag}
-                  </li>
-                ))}
+      <div className="experience-block">
+        <p className="eyebrow experience-label">Currently learning through work</p>
+        {experience.map((entry) => (
+          <article key={entry.id} className="experience-row">
+            <div className="experience-title-group">
+              <h3>{entry.company}</h3>
+              <p>{entry.role} · {entry.type}</p>
+            </div>
+            <div className="experience-detail">
+              <p>{entry.description}</p>
+              <ul className="inline-tags" aria-label="Technologies">
+                {entry.tags.map((tag) => <li key={tag}>{tag}</li>)}
               </ul>
-            </article>
-          ))}
-        </div>
+            </div>
+          </article>
+        ))}
       </div>
     </section>
   )

@@ -1,11 +1,12 @@
 import { site } from '../data/site'
-import { SoundToggle } from './SoundToggle'
 import { ThemeToggle } from './ThemeToggle'
 
-const navClass =
-  'nav-link px-3 py-2 transition-colors text-muted hover:text-foreground'
-
-const navItems = [...site.nav, ...site.navMore]
+const navigation = [
+  { label: 'Work', href: '#projects' },
+  { label: 'Writing', href: '#writing' },
+  { label: 'About', href: '#experience' },
+  { label: 'Contact', href: '#contact' },
+]
 
 function closeMobileMenu() {
   const menu = document.getElementById('mobile-nav')
@@ -15,87 +16,34 @@ function closeMobileMenu() {
 export function Header() {
   return (
     <>
-      <a href="#main" className="sr-only focus:not-sr-only text-mono text-small">
-        Skip to content
-      </a>
+      <a href="#main" className="skip-link">Skip to content</a>
+      <header className="site-header">
+        <div className="header-inner">
+          <a aria-label={`${site.author} — home`} href="#hero" className="wordmark">
+            {site.author}<span className="wordmark-period">.</span>
+          </a>
 
-      <header className="site-header sticky top-0 z-40 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-        <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6 sm:py-4">
-          <div className="flex items-center justify-between gap-3">
-            <a
-              aria-label={`${site.shortName} — home`}
-              href="#hero"
-              className="text-mono text-small font-medium tracking-tight text-foreground transition-colors hover:text-terminal"
-            >
-              <span className="text-terminal" aria-hidden="true">
-                ~/
-              </span>
-              {site.shortName}
-            </a>
+          <nav aria-label="Primary" className="desktop-nav">
+            {navigation.map((item) => (
+              <a key={item.href} href={item.href} className="nav-link">
+                {item.label}
+              </a>
+            ))}
+            <ThemeToggle />
+          </nav>
 
-            <div className="flex items-center gap-2 sm:gap-3">
-              <SoundToggle />
-              <ThemeToggle />
-
-              <nav aria-label="Primary" className="hidden md:block">
-                <ul className="flex items-center gap-0.5 whitespace-nowrap">
-                  {site.nav.map((item) => (
-                    <li key={item.href}>
-                      <a href={item.href} className={navClass}>
-                        {item.label}
-                      </a>
-                    </li>
-                  ))}
-                  <li>
-                    <details className="group relative">
-                      <summary
-                        className={`${navClass} cursor-pointer list-none transition-colors group-open:text-foreground`}
-                      >
-                        MORE
-                      </summary>
-                      <ul className="nav-dropdown absolute right-0 top-full z-50 mt-2 min-w-40 p-1">
-                        {site.navMore.map((item) => (
-                          <li key={item.href}>
-                            <a href={item.href} className={`block w-full ${navClass}`}>
-                              {item.label}
-                            </a>
-                          </li>
-                        ))}
-                      </ul>
-                    </details>
-                  </li>
-                </ul>
+          <div className="mobile-actions">
+            <ThemeToggle />
+            <details id="mobile-nav" className="mobile-menu">
+              <summary aria-label="Open navigation">Menu</summary>
+              <nav aria-label="Primary" className="mobile-nav-panel">
+                {navigation.map((item) => (
+                  <a key={item.href} href={item.href} onClick={closeMobileMenu}>
+                    {item.label}
+                  </a>
+                ))}
               </nav>
-
-              <details id="mobile-nav" className="group relative md:hidden">
-                <summary className="mobile-menu-btn">
-                  Menu
-                </summary>
-                <div
-                  className="mobile-nav-backdrop fixed inset-0 z-40 bg-background/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-150 group-open:opacity-100 group-open:pointer-events-auto"
-                  onClick={closeMobileMenu}
-                  aria-hidden="true"
-                />
-                <nav
-                  aria-label="Primary"
-                  className="mobile-nav-panel nav-dropdown z-50 p-1 shadow-lg"
-                >
-                  <ul className="flex flex-col">
-                    {navItems.map((item) => (
-                      <li key={item.href}>
-                        <a
-                          href={item.href}
-                          className={`mobile-nav-link ${navClass}`}
-                          onClick={closeMobileMenu}
-                        >
-                          {item.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </nav>
-              </details>
-            </div>
+            </details>
           </div>
         </div>
       </header>

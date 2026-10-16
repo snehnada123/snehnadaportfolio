@@ -103,16 +103,13 @@ export function ContactCTA() {
     <section
       id="contact"
       aria-label="Contact"
-      className="page-section border-t border-border"
+      className="page-section page-wrap section-divider contact-section"
     >
-      <div className="mx-auto max-w-6xl page-inner flex flex-col gap-6 sm:gap-10">
-        <div className="flex max-w-2xl flex-col gap-3">
-          <h2 className="text-title">{site.home.ctaTitle}</h2>
-          <p className="text-body text-muted leading-relaxed">
-            <span className="sm:hidden">Open to AI products, dev tools, and niche workflows.</span>
-            <span className="hidden sm:inline">{site.home.ctaBody}</span>
-          </p>
-        </div>
+      <div className="section-heading">
+        <p className="eyebrow">06 / Contact</p>
+        <h2>Let’s make something useful.</h2>
+        <p className="section-intro">I’m open to AI products, developer tools, and thoughtful collaborations. Have something in mind? I’d love to hear about it.</p>
+      </div>
 
         <div className="contact-layout grid min-w-0 grid-cols-1 gap-8 sm:gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-16">
           <div className="contact-form-shell min-w-0 flex flex-col gap-5 sm:gap-6">
@@ -120,7 +117,7 @@ export function ContactCTA() {
               <span className="text-terminal" aria-hidden="true">
                 →
               </span>{' '}
-              send a message
+              Send me a note
             </h3>
 
             {status === 'success' ? (
@@ -235,7 +232,7 @@ export function ContactCTA() {
               <span className="text-terminal" aria-hidden="true">
                 →
               </span>{' '}
-              or reach out directly
+              Or find me here
             </h3>
 
             <ul className="contact-direct-grid sm:hidden" aria-label="Direct contact links">
@@ -296,7 +293,6 @@ export function ContactCTA() {
             </ul>
           </div>
         </div>
-      </div>
     </section>
   )
 }
