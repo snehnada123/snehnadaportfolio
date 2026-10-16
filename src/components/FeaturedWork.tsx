@@ -3,10 +3,11 @@ import { projects } from '../data/projects'
 
 export function FeaturedWork() {
   return (
-    <section id="projects" aria-label="Projects" className="page-section page-wrap section-divider">
+    <section id="projects" aria-label="Projects" className="section-layout section-rule">
+      <div className="section-index"><span>03</span><span>PROJECTS</span></div>
+      <div className="section-body">
       <div className="section-heading section-heading-row">
         <div>
-          <p className="eyebrow">02 / Selected work</p>
           <h2>Things I’ve made.</h2>
         </div>
         <a className="text-link all-projects-link" href="https://github.com/snehnada123" target="_blank" rel="noreferrer">
@@ -34,6 +35,8 @@ export function FeaturedWork() {
           </a>
         ))}
       </div>
+      </div>
     </section>
   )
 }
+

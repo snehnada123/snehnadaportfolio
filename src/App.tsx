@@ -7,21 +7,29 @@ import { Skills } from './components/Skills'
 import { Education } from './components/Education'
 import { ContactCTA } from './components/ContactCTA'
 import { Footer } from './components/Footer'
+import { ThemeToggle } from './components/ThemeToggle'
 
 export default function App() {
   return (
-    <div className="site-shell min-h-screen flex flex-col antialiased">
+    <div className="site-shell antialiased">
       <Header />
-      <main id="main" className="flex-1">
-        <Hero />
-        <Experience />
-        <FeaturedWork />
-        <Writings />
-        <Skills />
-        <Education />
-        <ContactCTA />
-      </main>
-      <Footer />
+      <div className="main-panel">
+        <div className="topbar">
+          <span className="topbar-path"><span>PORTFOLIO</span><span className="path-slash">/</span> PERSONAL SITE</span>
+          <div className="topbar-actions"><span className="availability"><span className="status-dot" /> Available for interesting work</span><ThemeToggle /></div>
+        </div>
+        <main id="main" className="content-column">
+          <Hero />
+          <Experience />
+          <FeaturedWork />
+          <Writings />
+          <Skills />
+          <Education />
+          <ContactCTA />
+          <Footer />
+        </main>
+      </div>
     </div>
   )
 }
+

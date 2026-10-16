@@ -103,10 +103,11 @@ export function ContactCTA() {
     <section
       id="contact"
       aria-label="Contact"
-      className="page-section page-wrap section-divider contact-section"
+      className="section-layout section-rule contact-section"
     >
+      <div className="section-index"><span>07</span><span>CONTACT</span></div>
+      <div className="section-body">
       <div className="section-heading">
-        <p className="eyebrow">06 / Contact</p>
         <h2>Let’s make something useful.</h2>
         <p className="section-intro">I’m open to AI products, developer tools, and thoughtful collaborations. Have something in mind? I’d love to hear about it.</p>
       </div>
@@ -293,6 +294,8 @@ export function ContactCTA() {
             </ul>
           </div>
         </div>
+      </div>
     </section>
   )
 }
+

@@ -2,9 +2,10 @@ import { education } from '../data/resume'
 
 export function Education() {
   return (
-    <section id="education" aria-label="Education" className="page-section page-wrap section-divider compact-section">
+    <section id="education" aria-label="Education" className="section-layout section-rule">
+      <div className="section-index"><span>06</span><span>EDUCATION</span></div>
+      <div className="section-body">
       <div className="section-heading">
-        <p className="eyebrow">05 / Education</p>
         <h2>Where it started.</h2>
       </div>
       <div className="education-list">
@@ -18,6 +19,8 @@ export function Education() {
           </article>
         ))}
       </div>
+      </div>
     </section>
   )
 }
+
