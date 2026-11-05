@@ -33,12 +33,6 @@ export function Hero() {
           <NameTypeWriter onComplete={() => setNameDone(true)} />
         </h1>
 
-        <div className="kinetic-line" aria-label="Build. Learn. Connect.">
-          {['Build.', 'Learn.', 'Connect.'].map((word, index) => (
-            <span key={word} className="kinetic-word" style={{ animationDelay: `${index * 130}ms` }}>{word}</span>
-          ))}
-        </div>
-
         <TimeOnEarth />
 
         <p className="max-w-2xl text-body text-muted leading-relaxed">
