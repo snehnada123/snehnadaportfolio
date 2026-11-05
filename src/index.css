@@ -74,43 +74,11 @@ body {
   background: color-mix(in oklab, var(--terminal-green) 30%, transparent);
 }
 
-/* Airy blue surfaces with a restrained amber-red editorial accent. */
-.site-header {
-  box-shadow: 0 1px 0 color-mix(in oklab, var(--terminal-green) 10%, transparent);
-}
-
-#hero {
-  background:
-    radial-gradient(ellipse at 84% 12%, color-mix(in oklab, var(--terminal-green) 13%, transparent), transparent 48%),
-    linear-gradient(145deg, color-mix(in oklab, var(--background) 82%, white), var(--background));
-}
-
-#hero .hero-name::first-letter {
-  color: var(--warm-accent);
-}
-
-.page-section h2::before {
-  content: '';
-  display: inline-block;
-  width: 0.36rem;
-  height: 0.36rem;
-  margin-right: 0.72rem;
-  vertical-align: 0.25rem;
-  border-radius: 50%;
-  background: var(--warm-accent);
-}
-
-.project-row:hover,
-.projects-grid article:hover,
-.projects-grid article:focus-within {
+.site-header { border-color: var(--border); }
+#hero { background: var(--background); }
+.projects-grid article:hover, .projects-grid article:focus-within {
   border-color: var(--terminal-green);
-  background: color-mix(in oklab, var(--terminal-green) 5%, var(--background));
 }
-
-.contact-form-shell {
-  border-color: var(--border);
-}
-
 @layer components {
   .text-display {
     letter-spacing: -0.04em;
@@ -991,12 +959,7 @@ html.mobile-preview-active .hero-name {
   height: clamp(330px, 42vw, 430px);
   overflow: hidden;
   border: 1px solid var(--border);
-  background:
-    radial-gradient(circle at 50% 50%, color-mix(in oklab, var(--terminal-green) 9%, transparent), transparent 55%),
-    linear-gradient(color-mix(in oklab, var(--terminal-green) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--terminal-green) 4%, transparent) 1px, transparent 1px),
-    var(--background);
-  background-size: auto, 32px 32px, 32px 32px, auto;
+  background: color-mix(in oklab, var(--background) 94%, var(--terminal-green));
 }
 .skills-graph__edges { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
 .skills-graph__edges line { stroke: var(--terminal-green); stroke-width: .25; opacity: .38; transition: opacity .25s, stroke-width .25s; }
@@ -1011,7 +974,7 @@ html.mobile-preview-active .hero-name {
   border-radius: 999px;
   background: var(--background);
   color: var(--foreground);
-  box-shadow: 0 4px 18px color-mix(in oklab, var(--terminal-green) 12%, transparent);
+  box-shadow: 0 2px 8px color-mix(in oklab, var(--foreground) 5%, transparent);
   font-family: var(--font-mono);
   font-size: clamp(.65rem, 1.5vw, .8rem);
   white-space: nowrap;
@@ -1025,22 +988,11 @@ html.mobile-preview-active .hero-name {
   transform: translate(-50%, -50%) scale(1.12);
   background: var(--terminal-green);
   color: var(--background);
-  box-shadow: 0 8px 28px color-mix(in oklab, var(--terminal-green) 30%, transparent);
+  box-shadow: 0 4px 12px color-mix(in oklab, var(--terminal-green) 16%, transparent);
 }
 .skills-graph__node--ai { border-color: var(--warm-accent); }
 .skills-graph__node--ai:hover, .skills-graph__node--ai:focus-visible, .skills-graph__node--ai.is-active { background: var(--warm-accent); }
 .skills-graph__node.is-dim { opacity: .35; }
 .skills-graph__label { position: absolute; left: 1rem; bottom: .8rem; color: var(--muted); font: .65rem var(--font-mono); letter-spacing: .1em; }
 
-.kinetic-line { display: flex; flex-wrap: wrap; gap: .35em; color: var(--terminal-green); font-family: var(--font-mono); font-size: clamp(.9rem, 2vw, 1.25rem); font-weight: 600; }
-.kinetic-word { display: inline-block; animation: kinetic-rise .8s cubic-bezier(.2,.8,.2,1) both; transition: color .2s, transform .2s; }
-.kinetic-word:nth-child(3) { color: var(--warm-accent); }
-.kinetic-word:hover { transform: translateY(-5px) rotate(-2deg); }
-@keyframes kinetic-rise { from { opacity: 0; transform: translateY(18px) rotate(3deg); } to { opacity: 1; transform: translateY(0) rotate(0); } }
-
-.magnetic-dock { position: fixed; z-index: 45; left: 50%; bottom: 1.25rem; display: flex; align-items: end; gap: .25rem; padding: .5rem .65rem; transform: translateX(-50%); border: 1px solid var(--border); border-radius: 1.2rem; background: color-mix(in oklab, var(--background) 90%, transparent); backdrop-filter: blur(16px); box-shadow: 0 16px 45px color-mix(in oklab, var(--foreground) 13%, transparent); }
-.magnetic-dock__item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: .15rem; min-width: 3.8rem; min-height: 3.3rem; border-radius: .8rem; color: var(--muted); text-decoration: none; transition: transform .18s ease-out, color .18s, background .18s; transform-origin: bottom center; }
-.magnetic-dock__item span { font: .58rem var(--font-mono); letter-spacing: .02em; }
-.magnetic-dock__item:hover, .magnetic-dock__item:focus-visible { color: var(--terminal-green); background: color-mix(in oklab, var(--terminal-green) 10%, transparent); }
-@media (max-width: 639px) { .skills-graph { height: 360px; } .skills-graph__node { padding: .32rem .48rem; font-size: .6rem; } .magnetic-dock { bottom: .6rem; } .magnetic-dock__item { min-width: 3.2rem; } }
-@media (prefers-reduced-motion: reduce) { .kinetic-word { animation: none; } .kinetic-word:hover { transform: none; } .magnetic-dock__item { transition: none; } }
+@media (max-width: 639px) { .skills-graph { height: 360px; } .skills-graph__node { padding: .32rem .48rem; font-size: .6rem; } }
