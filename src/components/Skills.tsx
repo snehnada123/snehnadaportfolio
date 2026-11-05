@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import type { PointerEvent } from 'react'
 import { skills } from '../data/skills'
 
 const nodes = [
@@ -20,15 +19,15 @@ const links: [number, number][] = [
   [3, 6], [4, 7], [5, 0], [5, 7], [6, 7], [8, 9], [8, 6], [8, 3],
 ]
 
-type Point = { x: number; y: number; vx: number; vy: number }
-const initial = () => nodes.map((node) => ({ x: node.x, y: node.y, vx: 0, vy: 0 }))
+type Point = { x: number; y: number }
+const start = () => nodes.map((node) => ({ x: node.x, y: node.y }))
 const clamp = (value: number, min: number, max: number) => Math.max(min, Math.min(max, value))
 
 export function Skills() {
   const graphRef = useRef<HTMLDivElement>(null)
-  const pointsRef = useRef<Point[]>(initial())
   const dragRef = useRef<number | null>(null)
-  const [positions, setPositions] = useState(() => initial())
+  const offsetsRef = useRef<Point[]>(nodes.map(() => ({ x: 0, y: 0 })))
+  const [positions, setPositions] = useState<Point[]>(start)
   const [active, setActive] = useState<string | null>(null)
   const [dragging, setDragging] = useState<number | null>(null)
   const activeIndex = nodes.findIndex((node) => node.label === active)
@@ -39,59 +38,23 @@ export function Skills() {
   })
 
   useEffect(() => {
-    const graph = graphRef.current
-    if (!graph) return
     const media = window.matchMedia('(prefers-reduced-motion: reduce)')
-    let visible = false
-    let frame = 0
-    let last = 0
-    const observer = new IntersectionObserver(([entry]) => { visible = entry.isIntersecting }, { threshold: 0 })
-    observer.observe(graph)
-
-    const tick = (time: number) => {
-      frame = requestAnimationFrame(tick)
-      if (!visible || media.matches || time - last < 30) return
-      last = time
-      const points = pointsRef.current
-      points.forEach((point, index) => {
-        if (dragRef.current === index) return
-        const anchor = nodes[index]
-        const driftX = Math.sin(time * 0.00048 + index * 1.8) * 0.035
-        const driftY = Math.cos(time * 0.00042 + index * 2.1) * 0.035
-        let forceX = (anchor.x - point.x) * 0.006 + driftX
-        let forceY = (anchor.y - point.y) * 0.006 + driftY
-        points.forEach((other, otherIndex) => {
-          if (index === otherIndex) return
-          const dx = point.x - other.x
-          const dy = point.y - other.y
-          const distance = Math.hypot(dx, dy) || 1
-          if (distance < 17) {
-            const strength = (17 - distance) * 0.003
-            forceX += (dx / distance) * strength
-            forceY += (dy / distance) * strength
-          }
-        })
-        point.vx = (point.vx + forceX) * 0.94
-        point.vy = (point.vy + forceY) * 0.94
-        point.x = clamp(point.x + point.vx, 10, 90)
-        point.y = clamp(point.y + point.vy, 12, 88)
-      })
-      setPositions(points.map((point) => ({ ...point })))
-    }
-    frame = requestAnimationFrame(tick)
-    return () => { cancelAnimationFrame(frame); observer.disconnect() }
+    const timer = window.setInterval(() => {
+      if (document.hidden || media.matches) return
+      const time = performance.now()
+      setPositions(nodes.map((node, index) => {
+        if (dragRef.current === index) return {
+          x: node.x + offsetsRef.current[index].x,
+          y: node.y + offsetsRef.current[index].y,
+        }
+        return {
+          x: clamp(node.x + offsetsRef.current[index].x + Math.sin(time / 1600 + index * 1.7) * 3.5, 10, 90),
+          y: clamp(node.y + offsetsRef.current[index].y + Math.cos(time / 1900 + index * 2.2) * 3.5, 12, 88),
+        }
+      }))
+    }, 40)
+    return () => window.clearInterval(timer)
   }, [])
-
-  const moveDragged = (event: PointerEvent<HTMLButtonElement>, index: number) => {
-    if (dragRef.current !== index || !graphRef.current) return
-    const rect = graphRef.current.getBoundingClientRect()
-    const point = pointsRef.current[index]
-    point.x = clamp(((event.clientX - rect.left) / rect.width) * 100, 10, 90)
-    point.y = clamp(((event.clientY - rect.top) / rect.height) * 100, 12, 88)
-    point.vx = 0
-    point.vy = 0
-    setPositions(pointsRef.current.map((item) => ({ ...item })))
-  }
 
   return (
     <section id="skills" aria-label="Skills" className="page-section border-t border-border">
@@ -121,7 +84,14 @@ export function Skills() {
               onBlur={() => setActive(null)}
               onClick={() => setActive((current) => current === node.label ? null : node.label)}
               onPointerDown={(event) => { dragRef.current = index; setDragging(index); event.currentTarget.setPointerCapture(event.pointerId) }}
-              onPointerMove={(event) => moveDragged(event, index)}
+              onPointerMove={(event) => {
+                if (dragRef.current !== index || !graphRef.current) return
+                const rect = graphRef.current.getBoundingClientRect()
+                const x = clamp((event.clientX - rect.left) / rect.width * 100, 10, 90)
+                const y = clamp((event.clientY - rect.top) / rect.height * 100, 12, 88)
+                offsetsRef.current[index] = { x: x - node.x, y: y - node.y }
+                setPositions((current) => current.map((point, i) => i === index ? { x, y } : point))
+              }}
               onPointerUp={() => { dragRef.current = null; setDragging(null) }}
               onPointerCancel={() => { dragRef.current = null; setDragging(null) }}
               aria-pressed={index === activeIndex}
