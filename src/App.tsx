@@ -1,6 +1,7 @@
 import { BirthdayBalloons } from './components/BirthdayBalloons'
 import { MobilePreviewShell } from './components/MobilePreviewShell'
 import { Header } from './components/Header'
+import { MagneticDock } from './components/MagneticDock'
 import { Hero } from './components/Hero'
 import { Experience } from './components/Experience'
 import { Education } from './components/Education'
@@ -29,6 +30,7 @@ export default function App() {
           <ContactCTA />
         </main>
         <Footer />
+        <MagneticDock />
       </div>
     </MobilePreviewShell>
   )
