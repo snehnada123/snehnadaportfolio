@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { skills } from '../data/skills'
 
 const nodes = [
   { label: 'Python', x: 25, y: 32, group: 'language' },
@@ -99,9 +98,6 @@ export function Skills() {
           ))}
           <span className="skills-graph__label" aria-hidden="true">SKILL MAP / LIVE</span>
         </div>
-        <ul className="skill-list" aria-label="All skills">
-          {skills.map((skill) => <li key={skill} className="tag-pill tag-pill--skill">{skill}</li>)}
-        </ul>
       </div>
     </section>
   )
