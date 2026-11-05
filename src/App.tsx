@@ -21,10 +21,10 @@ export default function App() {
         <Header />
         <main id="main" className="flex-1">
           <Hero />
-          <Experience />
-          <Education />
-          <Skills />
           <FeaturedWork />
+          <Experience />
+          <Skills />
+          <Education />
           <GitHubActivity />
           <ContactCTA />
         </main>
