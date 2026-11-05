@@ -18,29 +18,33 @@
 
 :root,
 .light {
-  --background: #fafafa;
-  --foreground: #0a0a0a;
-  --muted: #737373;
-  --border: #e5e5e5;
-  --terminal-green: #7c3aed;
-  --contrib-0: #ebedf0;
-  --contrib-1: #d8c4f8;
-  --contrib-2: #b794f6;
-  --contrib-3: #9f7aea;
-  --contrib-4: #7c3aed;
+  color-scheme: light;
+  --background: #f7fbff;
+  --foreground: #10283d;
+  --muted: #536b7e;
+  --border: #cfe2ef;
+  --terminal-green: #0878be;
+  --warm-accent: #c65335;
+  --contrib-0: #e5f2fa;
+  --contrib-1: #b7dff4;
+  --contrib-2: #7ec5ea;
+  --contrib-3: #39a3dc;
+  --contrib-4: #0878be;
 }
 
 .dark {
-  --background: #0a0a0a;
-  --foreground: #fafafa;
-  --muted: #a3a3a3;
-  --border: #262626;
-  --terminal-green: #a78bfa;
-  --contrib-0: #262626;
-  --contrib-1: #3b2f55;
-  --contrib-2: #5b4a8a;
-  --contrib-3: #8b6fc0;
-  --contrib-4: #a78bfa;
+  color-scheme: dark;
+  --background: #0b1b2b;
+  --foreground: #f2f9ff;
+  --muted: #a9c4d8;
+  --border: #29465d;
+  --terminal-green: #79cdf7;
+  --warm-accent: #f29671;
+  --contrib-0: #1b354a;
+  --contrib-1: #285473;
+  --contrib-2: #347ca8;
+  --contrib-3: #4ca9d8;
+  --contrib-4: #79cdf7;
 }
 
 @theme {
@@ -68,6 +72,43 @@ body {
 
 ::selection {
   background: color-mix(in oklab, var(--terminal-green) 30%, transparent);
+}
+
+/* Airy blue surfaces with a restrained amber-red editorial accent. */
+.site-header {
+  box-shadow: 0 1px 0 color-mix(in oklab, var(--terminal-green) 10%, transparent);
+}
+
+#hero {
+  background:
+    radial-gradient(ellipse at 84% 12%, color-mix(in oklab, var(--terminal-green) 13%, transparent), transparent 48%),
+    linear-gradient(145deg, color-mix(in oklab, var(--background) 82%, white), var(--background));
+}
+
+#hero .hero-name::first-letter {
+  color: var(--warm-accent);
+}
+
+.page-section h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.36rem;
+  height: 0.36rem;
+  margin-right: 0.72rem;
+  vertical-align: 0.25rem;
+  border-radius: 50%;
+  background: var(--warm-accent);
+}
+
+.project-row:hover,
+.projects-grid article:hover,
+.projects-grid article:focus-within {
+  border-color: var(--terminal-green);
+  background: color-mix(in oklab, var(--terminal-green) 5%, var(--background));
+}
+
+.contact-form-shell {
+  border-color: var(--border);
 }
 
 @layer components {
