@@ -1015,9 +1015,12 @@ html.mobile-preview-active .hero-name {
   font-family: var(--font-mono);
   font-size: clamp(.65rem, 1.5vw, .8rem);
   white-space: nowrap;
-  cursor: pointer;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
   transition: opacity .2s, transform .2s, background .2s, box-shadow .2s;
 }
+.skills-graph__node.is-dragging { cursor: grabbing; z-index: 3; }
 .skills-graph__node:hover, .skills-graph__node:focus-visible, .skills-graph__node.is-active {
   transform: translate(-50%, -50%) scale(1.12);
   background: var(--terminal-green);
